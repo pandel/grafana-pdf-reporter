@@ -4,6 +4,8 @@
 
 Grafana PDF Reporter ist eine Webanwendung zur Erstellung und Verwaltung von PDF-Berichten aus Grafana-Dashboards. Die Anwendung ermöglicht es, ausgewählte Panels aus Grafana-Dashboards in anpassbaren Layouts zu arrangieren, diese mit benutzerdefinierten Vorlagen zu formatieren und als PDF-Berichte zu exportieren. Zusätzlich können wiederkehrende Berichtsaufträge geplant und per E-Mail versendet werden.
 
+WICHTIG: Es ist keine `grafana-image-renderer` Plugin nötig und auch keine Grafana Enterprise Lizenz!
+
 Einführungsvideo dazu: https://www.youtube.com/watch?v=X6ssfjGbemc
 
 ### Verwendete Technologie zur Entwicklung
