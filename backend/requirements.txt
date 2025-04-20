@@ -1,0 +1,26 @@
+# Grafana PDF Reporter Backend v1.1.3
+fastapi==0.115.12
+uvicorn==0.22.0
+gunicorn==23.0.0
+watchfiles==1.0.0
+python-dotenv==1.0.0
+python-multipart==0.0.6
+playwright==1.51.0
+grafana-client==4.3.2
+reportlab==4.0.4
+pillow==11.1.0
+apscheduler==3.10.1
+aiohttp==3.11.16
+pydantic==1.10.21
+jinja2==3.1.2
+# Authentication requirements
+bcrypt==4.0.1
+pyjwt==2.8.0
+python-jose==3.4.0
+# Encryption requirements
+cryptography==42.0.2
+# Microsoft Graph API requirements
+msal==1.26.0  # Microsoft Authentication Library
+requests==2.31.0
+# LDAP auth
+python-ldap==3.4.4

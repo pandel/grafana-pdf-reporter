@@ -1,0 +1,115 @@
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    image: grafana-pdf-reporter/backend:${GPR_VERSION:-latest}
+    container_name: backend
+    hostname: backend
+    restart: unless-stopped
+    ports:
+      - '8000:8000'
+    volumes:
+      - templates:/app/templates
+      - layouts:/app/layouts
+      - schedules:/app/schedules
+      - config:/app/config
+    environment:
+      - LOGLEVEL=${LOGLEVEL}
+      - HOST=${HOST}
+      - PORT=${PORT}
+      - TZ=${TZ}
+      - SECRET_KEY=${SECRET_KEY}
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: 1G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://backend:8000/api/health"]
+      interval: 300s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: grafana-pdf-reporter/frontend:${GPR_VERSION:-latest}
+    container_name: frontend
+    hostname: frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
+      - NODE_ENV=${NODE_ENV}
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    hostname: nginx
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT}:80"
+      - "${HTTPS_PORT}:443"
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./nginx/logs:/var/log/nginx
+      - ./nginx/security:/etc/nginx/security:ro
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  templates:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/backend/templates
+  layouts:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/backend/layouts
+  schedules:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/backend/schedules
+  config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/backend/config
