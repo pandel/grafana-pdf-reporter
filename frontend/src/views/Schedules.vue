@@ -398,13 +398,13 @@ const updateTranslatedOptions = () => {
   
   // Update translations for weekdays
   daysOfWeek.value = [
-    { title: i18n.t('schedules.monday'), value: 1 },
-    { title: i18n.t('schedules.tuesday'), value: 2 },
-    { title: i18n.t('schedules.wednesday'), value: 3 },
-    { title: i18n.t('schedules.thursday'), value: 4 },
-    { title: i18n.t('schedules.friday'), value: 5 },
-    { title: i18n.t('schedules.saturday'), value: 6 },
-    { title: i18n.t('schedules.sunday'), value: 0 }
+    { title: i18n.t('schedules.monday'), value: 0 },
+    { title: i18n.t('schedules.tuesday'), value: 1 },
+    { title: i18n.t('schedules.wednesday'), value: 2 },
+    { title: i18n.t('schedules.thursday'), value: 3 },
+    { title: i18n.t('schedules.friday'), value: 4 },
+    { title: i18n.t('schedules.saturday'), value: 5 },
+    { title: i18n.t('schedules.sunday'), value: 6 }
   ]
   
   // Days of month (no specific translations needed)

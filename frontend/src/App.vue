@@ -149,7 +149,7 @@ const appStore = useAppStore()
 const { user, isAuthenticated, loading } = storeToRefs(authStore)
 
 // App state
-const appVersion = ref('1.1.3')
+const appVersion = ref('1.1.4')
 const notification = ref(null)
 const settingsChecked = ref(false)
 const settingsCheckTimer = ref(null)

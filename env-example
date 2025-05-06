@@ -1,5 +1,5 @@
 # Grafana PDF Reporter Version
-GPR_VERSION=1.1.3
+GPR_VERSION=1.1.4
 
 # Backend
 LOGLEVEL=debug
