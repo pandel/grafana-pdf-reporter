@@ -3,7 +3,7 @@ services:
     build: 
       context: ./backend
       dockerfile: Dockerfile
-    image: grafana-pdf-reporter/backend:${GPR_VERSION:-latest}
+    image: grafana-pdf-reporter-v3/backend:${GPR_VERSION:-latest}
     container_name: backend
     hostname: backend
     restart: unless-stopped
@@ -38,7 +38,7 @@ services:
     build: 
       context: ./frontend
       dockerfile: Dockerfile
-    image: grafana-pdf-reporter/frontend:${GPR_VERSION:-latest}
+    image: grafana-pdf-reporter-v3/frontend:${GPR_VERSION:-latest}
     container_name: frontend
     hostname: frontend
     restart: unless-stopped
